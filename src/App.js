@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+import ManageRiceSeed from "./ManageRiceSeed";
+import Home from "./Home";
+import NavigationTabs from "./NavigationTabs";
+import ManageRiceSeedStages from "./ManageRiceSeedStages";
+import ManageRiceSeedIngredients from "./ManageRiceSeedIngredients";
+import ManageRiceSeedLocations from "./ManageRiceSeedLocations";
+import ManageRiceSeedSoils from "./ManageRiceSeedSoil";
+import ManageRiceSeedWeathers from "./ManageRiceSeedWeathers";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavigationTabs />
+      <Switch>
+        <Route path="/manage-rice-seed" component={ManageRiceSeed} />
+        <Route
+          path="/manage-rice-seed-stages"
+          component={ManageRiceSeedStages}
+        />
+        <Route
+          path="/manage-rice-seed-ingredients"
+          component={ManageRiceSeedIngredients}
+        />
+        <Route
+          path="/manage-rice-seed-locations"
+          component={ManageRiceSeedLocations}
+        />
+        <Route path="/manage-rice-seed-soils" component={ManageRiceSeedSoils} />
+        <Route
+          path="/manage-rice-seed-weathers"
+          component={ManageRiceSeedWeathers}
+        />
+        <Route path="/" exact component={Home} />
+        <Redirect to="/" />
+      </Switch>
+    </>
   );
 }
 
-export default App;
+export default withRouter(App);
