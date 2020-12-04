@@ -151,7 +151,8 @@ const CreateRiceSeedStageModal = ({
           defaultRiceSeedStageData.startDate.trim().length < 1 ||
           defaultRiceSeedStageData.endDate.trim().length < 1 ||
           defaultRiceSeedStageData.tasks.length < 1 ||
-          defaultRiceSeedStageData.tasks.some((task) => !task.isChecked),
+          defaultRiceSeedStageData.tasks.filter((task) => task.isChecked)
+            .length < 1,
         loading: isLoading,
       }}
       secondaryActions={[

@@ -103,9 +103,11 @@ const CreateTaskModal = ({ firebase, shouldOpen, handleModalClosed }) => {
             id: docId,
             days: defaultTaskData.days,
             task: fields.task.value,
-            endDate: new Date(fields.endDate.value).getDay().toString(),
+            endDate: (new Date(fields.endDate.value).getDay() - 1).toString(),
             repeat: fields.repeat.value,
-            startDate: new Date(fields.startDate.value).getDay().toString(),
+            startDate: (
+              new Date(fields.startDate.value).getDay() - 1
+            ).toString(),
           });
         getTasks();
         setDefaultTaskData({
@@ -317,11 +319,7 @@ const CreateTaskModal = ({ firebase, shouldOpen, handleModalClosed }) => {
       open={shouldOpen}
       onClose={() => {
         handleModalClosed(
-          tasks.map((task) => {
-            if (selectedTasks.includes(task.id)) {
-              return task;
-            }
-          })
+          tasks.filter((task) => selectedTasks.includes(task.id))
         );
       }}
       primaryAction={{
@@ -335,11 +333,7 @@ const CreateTaskModal = ({ firebase, shouldOpen, handleModalClosed }) => {
           content: "Close",
           onAction: () => {
             handleModalClosed(
-              tasks.map((task) => {
-                if (selectedTasks.includes(task.id)) {
-                  return task;
-                }
-              })
+              tasks.filter((task) => selectedTasks.includes(task.id))
             );
           },
         },

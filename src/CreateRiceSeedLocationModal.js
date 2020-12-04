@@ -26,7 +26,7 @@ const CreateRiceSeedLocationModal = ({
     }
   }, [defaultRiceSeedLocation]);
 
-  const { fields, submit, submitting, dirty } = useForm({
+  const { fields, submit, reset, submitting, dirty } = useForm({
     fields: {
       name: useField({
         value: defaultRiceSeedLocationData.name,
@@ -44,6 +44,8 @@ const CreateRiceSeedLocationModal = ({
         const data = {
           name: fields.name.value,
         };
+        setDefaultRiceSeedLocationData({ name: "" });
+        reset();
         if (Object.values(defaultRiceSeedLocation).length > 0) {
           await firebase.firestore
             .collection("locations")
@@ -104,7 +106,8 @@ const CreateRiceSeedLocationModal = ({
         onAction: submit,
         disabled:
           (!dirty && !Object.values(defaultRiceSeedLocation).length > 0) ||
-          hasValidationError,
+          hasValidationError ||
+          submitting,
         loading: isLoading,
       }}
       secondaryActions={[

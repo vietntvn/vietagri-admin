@@ -29,7 +29,7 @@ const CreateRiceSeedIngredientModal = ({
     }
   }, [defaultRiceSeedIngredient]);
 
-  const { fields, submit, submitting, dirty } = useForm({
+  const { fields, submit, reset, submitting, dirty } = useForm({
     fields: {
       title: useField({
         value: defaultRiceSeedIngredientData.title,

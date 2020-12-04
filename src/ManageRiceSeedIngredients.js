@@ -187,6 +187,7 @@ const ManageRiceSeedIngredients = ({ firebase }) => {
             shouldOpen={shouldModalOpen}
             handleModalClosed={handleModalClosed}
             handleModalDone={() => {
+              setIngredientToBeEdited({});
               setShouldModalOpen(false);
               getRiceSeedIngredients();
             }}

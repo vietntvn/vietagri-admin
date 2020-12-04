@@ -98,6 +98,9 @@ const ManageRiceSeedLocations = ({ firebase }) => {
       <thead>
         <tr className="flex-table header" role="rowgroup">
           <th className="flex-row" role="columnheader">
+            <TextStyle variation="strong">No</TextStyle>
+          </th>
+          <th className="flex-row" role="columnheader">
             <TextStyle variation="strong">Location Name</TextStyle>
           </th>
           <th className="flex-row" role="columnheader">
@@ -110,12 +113,15 @@ const ManageRiceSeedLocations = ({ firebase }) => {
     </table>
   );
 
-  const renderItem = useCallback((item, id) => {
+  const renderItem = useCallback((item, id, index) => {
     return (
       <ResourceItem id={id} onClick={() => {}}>
         <table className="table-container">
           <tbody>
             <tr className="flex-table row" role="rowgroup">
+              <td className="flex-row" role="cell">
+                {index + 1}
+              </td>
               <td className="flex-row" role="cell">
                 {item.name}
               </td>
@@ -167,6 +173,7 @@ const ManageRiceSeedLocations = ({ firebase }) => {
             shouldOpen={shouldModalOpen}
             handleModalClosed={handleModalClosed}
             handleModalDone={() => {
+              setLocationToBeEdited({});
               setShouldModalOpen(false);
               getRiceSeedLocations();
             }}
